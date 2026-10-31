@@ -1,0 +1,79 @@
+
+class Complex {
+    private double real;
+    private double imaginary;
+    // Constructor
+    Complex(double real, double imaginary) {
+        this.real = real;
+        this.imaginary = imaginary;
+    }
+    // Add two complex numbers
+    Complex add(Complex c) {
+        return new Complex(
+            this.real + c.real,
+            this.imaginary + c.imaginary
+        );
+    }
+    // Multiply two complex numbers
+    Complex multiply(Complex c) {
+        double r = (this.real * c.real) -
+                   (this.imaginary * c.imaginary);
+        double i = (this.real * c.imaginary) +
+                   (this.imaginary * c.real);
+        return new Complex(r, i);
+    }
+    // Compare magnitudes
+    int compareMagnitude(Complex c) {
+        double m1 = Math.sqrt(
+            real * real + imaginary * imaginary
+        );
+        double m2 = Math.sqrt(
+            c.real * c.real + c.imaginary * c.imaginary
+        );
+        return Double.compare(m1, m2);
+    }
+    // Return a copy of the object
+    Complex copy() {
+        return new Complex(real, imaginary);
+    }
+    // Modify values for copy demonstration
+    void setReal(double real) {
+        this.real = real;
+    }
+    // Display complex number
+    void display() {
+        System.out.println(real +
+            (imaginary >= 0 ? " + " : " - ") +
+            Math.abs(imaginary) + "i");
+    }
+    public static void main(String[] args) {
+        Complex c1 = new Complex(3, 4);
+        Complex c2 = new Complex(2, 5);
+        System.out.print("First number: ");
+        c1.display();
+        System.out.print("Second number: ");
+        c2.display();
+        Complex sum = c1.add(c2);
+        System.out.print("Addition: ");
+        sum.display();
+        Complex product = c1.multiply(c2);
+        System.out.print("Multiplication: ");
+        product.display();
+        int result = c1.compareMagnitude(c2);
+        if (result > 0) {
+            System.out.println("First number has greater magnitude");
+        } else if (result < 0) {
+            System.out.println("Second number has greater magnitude");
+        } else {
+            System.out.println("Both have equal magnitude");
+        }
+        Complex c3 = c1.copy();
+        System.out.print("Copied object: ");
+        c3.display();
+        c1.setReal(100);
+        System.out.print("Original after modification: ");
+        c1.display();
+        System.out.print("Copy after modification: ");
+        c3.display();
+    }
+}

@@ -1,0 +1,88 @@
+
+class BankAccount {
+
+    private String accountNumber;
+    private double balance;
+
+    static int accountCount = 0;
+
+    final String accountIdentifier;
+
+    // Constructor
+    BankAccount(String accountNumber,
+                double balance,
+                String accountIdentifier) {
+
+        if (balance < 0) {
+            throw new IllegalArgumentException(
+                "Initial balance cannot be negative"
+            );
+        }
+
+        this.accountNumber = accountNumber;
+        this.balance = balance;
+        this.accountIdentifier = accountIdentifier;
+
+        accountCount++;
+    }
+
+    // Deposit method
+    void deposit(double amount) {
+
+        if (amount > 0) {
+            balance += amount;
+            System.out.println("Deposit successful");
+        } else {
+            System.out.println("Invalid deposit amount");
+        }
+    }
+
+    // Withdraw method
+    void withdraw(double amount) {
+
+        if (amount <= 0) {
+            System.out.println("Invalid withdrawal amount");
+        } else if (amount > balance) {
+            System.out.println("Insufficient balance");
+        } else {
+            balance -= amount;
+            System.out.println("Withdrawal successful");
+        }
+    }
+
+    // Getter method
+    double getBalance() {
+        return balance;
+    }
+}
+
+public class BankTest {
+
+    public static void main(String[] args) {
+
+        BankAccount b1 = new BankAccount(
+            "1234567890", 5000, "ACC001"
+        );
+
+        BankAccount b2 = new BankAccount(
+            "9876543210", 3000, "ACC002"
+        );
+
+        b1.deposit(2000);
+
+        b1.withdraw(1000);
+
+        b1.withdraw(10000);
+
+        System.out.println("Balance: " + b1.getBalance());
+
+        System.out.println("Account Identifier: " +
+                           b1.accountIdentifier);
+
+        System.out.println("Total Accounts: " +
+                           BankAccount.accountCount);
+
+        // System.out.println(b1.balance);
+        // This causes a compilation error because balance is private.
+    }
+}
