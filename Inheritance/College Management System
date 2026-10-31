@@ -82,15 +82,12 @@ public class Main {
             new Faculty("Ravi", 40, "Java"),
             new Administrator("Raj", 45, "Manager")
         };
-
         for (Person p : people) {
             p.displayDetails();
             System.out.println();
         }
-
         Person.Department d = new Person.Department();
         d.display();
-
         System.out.println("Total People: " + Person.count);
     }
 }
