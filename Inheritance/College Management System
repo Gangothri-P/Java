@@ -1,0 +1,96 @@
+
+class Person {
+    private String name;
+    private int age;
+
+    static int count = 0;
+    static final String COLLEGE = "ABC College";
+
+    Person(String name, int age) {
+        this.name = name;
+        this.age = age;
+        count++;
+    }
+
+    void displayDetails() {
+        System.out.println("Name: " + name);
+        System.out.println("Age: " + age);
+        System.out.println("College: " + COLLEGE);
+    }
+
+    void displayDetails(String role) {
+        System.out.println("Role: " + role);
+        displayDetails();
+    }
+
+    static class Department {
+        void display() {
+            System.out.println("Department: Computer Science");
+        }
+    }
+}
+
+class Student extends Person {
+    int usn;
+
+    Student(String name, int age, int usn) {
+        super(name, age);
+        this.usn = usn;
+    }
+
+    void displayDetails() {
+        System.out.println("Student");
+        super.displayDetails();
+        System.out.println("USN: " + usn);
+    }
+}
+
+class Faculty extends Person {
+    String subject;
+
+    Faculty(String name, int age, String subject) {
+        super(name, age);
+        this.subject = subject;
+    }
+
+    void displayDetails() {
+        System.out.println("Faculty");
+        super.displayDetails();
+        System.out.println("Subject: " + subject);
+    }
+}
+
+class Administrator extends Person {
+    String designation;
+
+    Administrator(String name, int age, String designation) {
+        super(name, age);
+        this.designation = designation;
+    }
+
+    void displayDetails() {
+        System.out.println("Administrator");
+        super.displayDetails();
+        System.out.println("Designation: " + designation);
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Person[] people = {
+            new Student("Anu", 20, 101),
+            new Faculty("Ravi", 40, "Java"),
+            new Administrator("Raj", 45, "Manager")
+        };
+
+        for (Person p : people) {
+            p.displayDetails();
+            System.out.println();
+        }
+
+        Person.Department d = new Person.Department();
+        d.display();
+
+        System.out.println("Total People: " + Person.count);
+    }
+}
